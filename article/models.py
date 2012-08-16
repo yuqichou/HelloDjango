@@ -6,3 +6,9 @@ class Article(models.Model):
     author = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')
     content=models.CharField(max_length=2000)
+    
+    
+    def __unicode__(self):
+        return self.title
+    
+

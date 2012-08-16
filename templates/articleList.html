@@ -1,0 +1,14 @@
+<html>
+
+	<body>
+		<ul>
+			{% for article in  article_list.all%}
+			    <li>
+			    	{{ article.title }} --{{ article.author }}
+			    	<p>发布日期: {{ article.pub_date }}</p>
+			    	<p>{{ article.content }}</p>
+			    </li>
+			{% endfor %}
+		</ul>
+	</body>
+</html>
