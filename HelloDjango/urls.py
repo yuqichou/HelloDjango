@@ -1,7 +1,7 @@
-from article.models import Article
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.views.generic.list import ListView
+from news.models import Article
 
 # Uncomment the next two lines to enable the admin:
 #from django.contrib import admin
@@ -19,9 +19,9 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
       url(r'^admin/', include(admin.site.urls)),
       
-      url(r'^$', 'article.views.index'),
+      url(r'^$', 'news.views.index'),
       
-      url(r'^cms/articleList.html', ListView.as_view(queryset=Article.objects,
+      url(r'^news/articleList.html', ListView.as_view(queryset=Article.objects,
                                                      context_object_name='article_list',
                                                      template_name='articleList.html')),
 )
