@@ -21,9 +21,13 @@ urlpatterns = patterns('',
       
       url(r'^$', 'news.views.index'),
       
-      url(r'^news/articleList.html', ListView.as_view(queryset=Article.objects,
-                                                     context_object_name='article_list',
-                                                     template_name='articleList.html')),
+      url(r'^news/articleList.html', 'news.views.article_list'),
+      url(r'^news/articleDetail.html', 'news.views.article_detail'),
+      
+      
+#      url(r'^news/articleList.html', ListView.as_view(queryset=Article.objects,
+#                                                     context_object_name='article_list',
+#                                                     template_name='articleList.html')),
 )
 
 

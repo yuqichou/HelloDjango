@@ -1,0 +1,23 @@
+<html>
+	<title>{{article.title}} </title>
+	
+	<body>
+		
+		<dl>
+			<dt>{{article.title}}</dt>
+			<dd>
+				<div>
+					作者:
+					{% for author in article.authors.all %}
+						{{author}}
+					{% endfor %}
+				</div>
+				<pre>
+				{{article.content}}
+				</pre>
+			</dd>
+		</dl>
+			
+	</body>
+	
+</html>
