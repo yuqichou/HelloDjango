@@ -1,0 +1,50 @@
+<html>
+	<title>{{article}} 评论列表</title>
+	<body>
+		
+		<ul>
+			{% for comment in comments %}
+				<li>
+					{{ comment}}
+					<div>{{ comment.comment_user}}</div>
+				</li>
+			{% endfor %}
+		</ul>
+		
+		<div class="pagination">
+		    <span class="step-links">
+		        {% if comments.has_previous %}
+		            <a href="?page={{ comments.previous_page_number }}">上一页</a>
+		        {% endif %}
+		        <span class="current">
+		             {{ comments.number }} / {{ comments.paginator.num_pages }}
+		        </span>
+		        {% if comments.has_next %}
+		            <a href="?page={{ comments.next_page_number }}">下一页</a>
+		        {% endif %}
+		    </span>
+		</div>
+		
+		
+		
+		
+		
+		
+		<div>
+			<form action="/news/comment/add" method="post">
+				{% csrf_token %}
+				<textarea name="comment_text" ></textarea>
+				<input type="text" name="comment_user" />
+				<input type="hidden" name="article_id" value="{{article.id}}" />
+				<input type="submit" />
+			</form>
+		</div>
+		
+		
+		
+	</body>
+</html>
+
+
+
+

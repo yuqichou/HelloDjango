@@ -6,14 +6,14 @@ class Author(models.Model):
     email = models.EmailField('email',blank=True)
     head_photo=models.ImageField('作者照片',upload_to='author_photos/%Y/%m/%d/',blank=True)
     
+    
     class Meta:  
         verbose_name = "作者信息"  
         verbose_name_plural = "作者信息"  
     
     def __unicode__(self):
         return self.name
-
-
+    
 
 class Article(models.Model):
     title = models.CharField('文章标题',max_length=200)

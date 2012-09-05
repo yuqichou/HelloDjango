@@ -1,7 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from django.views.generic.list import ListView
-from news.models import Article
+from HelloDjango import settings
 
 # Uncomment the next two lines to enable the admin:
 #from django.contrib import admin
@@ -19,16 +18,24 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
       url(r'^admin/', include(admin.site.urls)),
       
-      url(r'^$', 'news.views.index'),
       
-      url(r'^news/articleList.html', 'news.views.article_list'),
-      url(r'^news/articleDetail.html', 'news.views.article_detail'),
+      url(r'^news/index', 'news.views.index'),
+      url(r'^news/article/list', 'news.views.article_list'),
+      url(r'^news/article/(?P<article_id>\d+)', 'news.views.article_detail'),
       
+      url(r'^news/comment/list/(?P<article_id>\d+)', 'news.views.comment_list'),
+      url(r'^news/comment/add', 'news.views.comment_add'),
       
 #      url(r'^news/articleList.html', ListView.as_view(queryset=Article.objects,
 #                                                     context_object_name='article_list',
 #                                                     template_name='articleList.html')),
 )
+
+ 
+urlpatterns += patterns('', 
+            (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_PATH, 'show_indexes':True}), 
+            ) 
+
 
 
 

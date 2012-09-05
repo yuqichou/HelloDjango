@@ -17,7 +17,15 @@
 				</pre>
 			</dd>
 		</dl>
-			
+		
+		
+		<div><a href="/news/comment/list/{{article.id}}" >查看评论</a></div>
+		
+		
+		{% if article.attachment %}
+		<div><a target="blank" href="{{MEDIA_URL}}{{article.attachment}}">下载附件</a></div>
+		{% endif %}
+		
 	</body>
 	
 </html>

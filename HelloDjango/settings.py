@@ -1,4 +1,5 @@
 # Django settings for HelloDjango project.
+import os
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -46,14 +47,9 @@ USE_L10N = True
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
 
-# Absolute filesystem path to the directory that will hold user-uploaded files.
-# Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = 'C:/static/media'
 
-# URL that handles the media served from MEDIA_ROOT. Make sure to use a
-# trailing slash.
-# Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = '/static/media/'
+HERE = os.path.dirname(os.path.dirname(__file__))
+
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
@@ -61,18 +57,31 @@ MEDIA_URL = '/static/media/'
 # Example: "/home/media/media.lawrence.com/static/"
 STATIC_ROOT = ''
 
+STATIC_PATH = os.path.join( HERE , 'static').replace('\\','/')
+
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
+
+# Absolute filesystem path to the directory that will hold user-uploaded files.
+# Example: "/home/media/media.lawrence.com/media/"
+MEDIA_ROOT = os.path.join(STATIC_PATH ,'uploads/').replace('\\','/')
+
+# URL that handles the media served from MEDIA_ROOT. Make sure to use a
+# trailing slash.
+# Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
+MEDIA_URL = '/static/uploads/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    "C:/static/media/",
-    "C:/static/attachment/",
-    "C:/static/",
+#    "C:/static/media/",
+#    "C:/static/attachment/",
+#    "C:/static/",
+    
+    os.path.join(HERE,'static').replace('\\','/'),
 )
 
 # List of finder classes that know how to find static files in
@@ -102,6 +111,7 @@ MIDDLEWARE_CLASSES = (
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
+
 
 ROOT_URLCONF = 'HelloDjango.urls'
 
