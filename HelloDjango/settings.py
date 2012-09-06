@@ -125,6 +125,26 @@ TEMPLATE_DIRS = (
     'HelloDjango/templates',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.core.context_processors.request",
+    #'django.core.context_processors.auth',
+    "django.contrib.auth.context_processors.auth",
+    #"django.core.context_processors.debug",
+    #"django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    
+    
+    #"django.core.context_processors.tz",
+    #"django.contrib.messages.context_processors.messages",
+    
+    
+    "news.context_processors.global_list_per_page",
+)
+
+GLOBAL_LIST_PER_PAGE=2
+GLOBAL_PAGE_PER_VIEW=5
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -8,3 +8,5 @@ in eclipse hide pyc files {
 	ctrl+f10 in your project
 	filter -> add "*.pyc"
 }
+
+

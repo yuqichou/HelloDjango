@@ -1,44 +1,75 @@
 <html>
-	<title>{{article}} 评论列表</title>
+	
+	
+	<head>
+		<title>{{article}} 评论列表</title>
+		{% include "include/includeCss.html" %}
+	</head>
+	
+	
 	<body>
 		
-		<ul>
-			{% for comment in comments %}
-				<li>
-					{{ comment}}
-					<div>{{ comment.comment_user}}</div>
-				</li>
-			{% endfor %}
-		</ul>
+		{% include "include/nav.html" %}
 		
-		<div class="pagination">
-		    <span class="step-links">
-		        {% if comments.has_previous %}
-		            <a href="?page={{ comments.previous_page_number }}">上一页</a>
-		        {% endif %}
-		        <span class="current">
-		             {{ comments.number }} / {{ comments.paginator.num_pages }}
-		        </span>
-		        {% if comments.has_next %}
-		            <a href="?page={{ comments.next_page_number }}">下一页</a>
-		        {% endif %}
-		    </span>
+		<div class="container-fluid">
+			<div class="row-fluid">
+				
+				
+				{% if page.object_list.count > 0 %}
+					{% for comment in page %}
+					<blockquote >
+					  <p>{{ comment}}</p>
+					  <small>({{ comment.comment_user}})  {{ comment.pub_date|date:"Y-m-d H:i:s" }}</small>
+					</blockquote>
+					{% endfor %}
+					
+					{% include "include/includePagination.html" %}
+
+				{% endif %}
+				
+				{% if page.object_list.count < 1 %}
+					<div>暂无评论</div>
+				{% endif %}
+				
+			</div>
+			
+			<div>
+				<legend>提交评论</legend>
+				<form action="/news/comment/add" method="post" class="form-horizontal">
+					{% csrf_token %}
+					 <input type="hidden" name="article_id" value="{{article.id}}" />
+				  <div class="control-group">
+				    <label class="control-label" for="comment_text">评论内容</label>
+				    <div class="controls">
+				      <textarea id="comment_text" name="comment_text" ></textarea>
+				    </div>
+				  </div>
+				  <div class="control-group">
+				    <label class="control-label" for="comment_user">昵称</label>
+				    <div class="controls">
+				       <input type="text" id="comment_user" name="comment_user" />
+				    </div>
+				  </div>
+				  <div class="control-group">
+				    <div class="controls">
+				      <button type="submit" class="btn">提交评论</button>
+				    </div>
+				  </div>
+				</form>
+			</div>
 		</div>
 		
 		
 		
 		
+				
 		
 		
-		<div>
-			<form action="/news/comment/add" method="post">
-				{% csrf_token %}
-				<textarea name="comment_text" ></textarea>
-				<input type="text" name="comment_user" />
-				<input type="hidden" name="article_id" value="{{article.id}}" />
-				<input type="submit" />
-			</form>
-		</div>
+		
+		
+		
+		
+		
 		
 		
 		

@@ -5,6 +5,8 @@ from django.shortcuts import render_to_response, redirect
 from django.template.context import RequestContext
 from django.utils import timezone
 from news.models import Article, Comment
+from HelloDjango import settings
+
 
 
 def get_client_ip(request):
@@ -18,15 +20,21 @@ def get_client_ip(request):
 
 #首页
 def index(request):
-    return render_to_response('index.html')
+    return render_to_response('index.html',context_instance=RequestContext(request))
 
 #文章列表
 def article_list(request):
     
     
     article_list = Article.objects.all().order_by('-pub_date')
-    paginator = Paginator(article_list, 3) # Show 25 contacts per page
+    
     page = request.GET.get('page')
+    pageSize = request.GET.get('pageSize')
+    
+    if(type(pageSize)!=int or pageSize<1):
+        pageSize=settings.GLOBAL_LIST_PER_PAGE
+        
+    paginator = Paginator(article_list,pageSize) # Show 25 contacts per page
     
     try:
         articles = paginator.page(page)
@@ -38,7 +46,7 @@ def article_list(request):
         articles = paginator.page(paginator.num_pages)
     
     return render_to_response('articleList.html',
-                              {'articles': articles},
+                              {'page': articles},
                               context_instance=RequestContext(request))
     
     
@@ -76,6 +84,7 @@ def comment_list(request,article_id):
     
     
     comment_list = Comment.objects.filter(article=articleParam)
+    
     paginator = Paginator(comment_list, 5) # Show 25 contacts per page
     page = request.GET.get('page')
     
@@ -89,12 +98,11 @@ def comment_list(request,article_id):
         comments = paginator.page(paginator.num_pages)
     
     return render_to_response('commentList.html',
-                              {'comments': comments,
+                              {'page': comments,
                                'article':articleParam},
                               context_instance=RequestContext(request))
     
     
-
     
     
     

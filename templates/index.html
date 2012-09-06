@@ -1,15 +1,44 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
- <head>
-  <title> New Document </title>
-  <meta name="Generator" content="EditPlus">
-  <meta name="Author" content="">
-  <meta name="Keywords" content="">
-  <meta name="Description" content="">
- </head>
+<head>
+<title>New Document</title>
+<meta name="Generator" content="EditPlus">
+<meta name="Author" content="">
+<meta name="Keywords" content="">
+<meta name="Description" content="">
+{% include "include/includeCss.html" %}
+</head>
 
- <body>
-	Hello World!Yes
-	<a href="/news/article/list">文章列表</a>
- </body>
+<body>
+
+	
+	{% include "include/nav.html" %}
+	
+	<div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span9">
+          <div class="hero-unit">
+            <h1>Hello, world!</h1>
+            <p>
+				study python
+            </p>
+            <p>
+            	study django
+            </p>
+            <p>
+				study bootstrap
+			</p>
+            <p><a class="btn btn-primary btn-large" href="https://www.djangoproject.com/" >Learn more &raquo;</a></p>
+          </div>
+        </div><!--/span-->
+      </div><!--/row-->
+    </div>
+	
+	
+	
+	
+	
+	
+
+</body>
 </html>

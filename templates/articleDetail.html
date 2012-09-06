@@ -1,30 +1,42 @@
 <html>
-	<title>{{article.title}} </title>
+	
+	<head>
+		<title>{{article.title}} </title>
+		{% include "include/includeCss.html" %}
+	</head>
+	
 	
 	<body>
-		
-		<dl>
-			<dt>{{article.title}}</dt>
-			<dd>
-				<div>
-					作者:
+		{% include "include/nav.html" %}
+		<div class="container">
+
+	      <h1>{{article.title}}</h1>
+	      
+	      <span>
+	      	作者:
 					{% for author in article.authors.all %}
 						{{author}}
 					{% endfor %}
-				</div>
-				<pre>
-				{{article.content}}
-				</pre>
-			</dd>
-		</dl>
+	      </span>
+	      
+	      <pre>{{article.content}}</pre>
+	      
+	      {% if article.attachment %}
+			<div><a target="blank" href="{{MEDIA_URL}}{{article.attachment}}">下载附件</a></div>
+		  {% endif %}
+			
+		  <div><a href="/news/comment/list/{{article.id}}" >查看评论</a></div>
+	    </div> 
 		
 		
-		<div><a href="/news/comment/list/{{article.id}}" >查看评论</a></div>
 		
 		
-		{% if article.attachment %}
-		<div><a target="blank" href="{{MEDIA_URL}}{{article.attachment}}">下载附件</a></div>
-		{% endif %}
+		
+		
+		
+		
+		
+		
 		
 	</body>
 	
