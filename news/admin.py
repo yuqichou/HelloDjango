@@ -4,6 +4,9 @@ from django.contrib import admin
 from news.models import Article, Author, Comment
 from HelloDjango import settings
 
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')  
 
 class ArticleAdmin(admin.ModelAdmin):
     list_per_page = 15
@@ -17,7 +20,7 @@ class AuthorAdmin(admin.ModelAdmin):
     def show_head_photo(self,obj):
         
         if(len(obj.head_photo.name)>0):
-            return '<a target="blank" href="'+settings.MEDIA_URL+obj.head_photo.name+'">查看照片</a>'
+            return '<a target="blank" href="'+settings.MEDIA_URL+obj.head_photo.name+'">'+'查看'+'</a>'
         else:
             return ''
     
