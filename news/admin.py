@@ -43,6 +43,6 @@ class CommentAdmin(admin.ModelAdmin):
     list_filter = ['pub_date']
     search_fields = ['text']
 
-admin.site.register(Article, ArticleAdmin);
-admin.site.register(Author, AuthorAdmin);
-admin.site.register(Comment, CommentAdmin);
+admin.site.register(Article, ArticleAdmin)
+admin.site.register(Author, AuthorAdmin)
+admin.site.register(Comment, CommentAdmin)
