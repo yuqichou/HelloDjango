@@ -1,10 +1,10 @@
 # coding:utf8
+from HelloDjango import settings
 from django import forms
 from django.contrib import admin
-from news.models import Article, Author, Comment
-from HelloDjango import settings
-
+from news.models import Article, Author, Comment, Column
 import sys
+
 reload(sys)
 sys.setdefaultencoding('utf-8')  
 
@@ -43,6 +43,10 @@ class CommentAdmin(admin.ModelAdmin):
     list_filter = ['pub_date']
     search_fields = ['text']
 
+
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Author, AuthorAdmin)
 admin.site.register(Comment, CommentAdmin)
+admin.site.register(Column)
+
+

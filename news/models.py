@@ -15,12 +15,29 @@ class Author(models.Model):
         return self.name
     
 
+class Column(models.Model):
+    name=models.CharField('栏目标题',max_length=50)
+    parent_column=models.ForeignKey('self',blank=True,null=True,verbose_name='父栏目',related_name='children')
+    
+    def __unicode__(self):
+        if(self.parent_column == None):
+            return self.name
+        else:
+            return self.parent_column.name+'--'+self.name
+    
+    class Meta:  
+        verbose_name = "文章栏目"  
+        verbose_name_plural = "文章栏目"  
+        
+
 class Article(models.Model):
     title = models.CharField('文章标题',max_length=200)
     pub_date = models.DateTimeField('发布时间')
     content=models.TextField('文章内容')
     authors = models.ManyToManyField(Author,verbose_name="作者")
     attachment=models.FileField('文章附件',upload_to='attachment/%Y/%m/%d/',blank=True)
+    
+    column=models.ForeignKey(Column,verbose_name='所属栏目')
     
     class Meta:  
         verbose_name = "文章信息"  
@@ -35,7 +52,7 @@ class Comment(models.Model):
     pub_date = models.DateTimeField('发布时间')
     ip_addr=models.IPAddressField('评论ip',blank=True)
     comment_user=models.CharField('评论人',max_length=50,blank=True)
-    article=models.ForeignKey(Article)
+    article=models.ForeignKey(Article,verbose_name='文章')
     
     class Meta:  
         verbose_name = "文章评论"  
@@ -45,4 +62,9 @@ class Comment(models.Model):
         return self.text
     
     
+
+
+        
+        
+
     
