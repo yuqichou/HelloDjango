@@ -6,8 +6,9 @@ from django.template.context import RequestContext
 from django.utils import timezone
 from news.models import Article, Comment
 from HelloDjango import settings
+from django.utils.log import getLogger
 
-
+logger = getLogger('django.request')
 
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')

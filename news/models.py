@@ -35,7 +35,7 @@ class Article(models.Model):
     pub_date = models.DateTimeField('发布时间')
     content=models.TextField('文章内容')
     authors = models.ManyToManyField(Author,verbose_name="作者")
-    attachment=models.FileField('文章附件',upload_to='attachment/%Y/%m/%d/',blank=True)
+    attachment=models.FileField('文章附件',upload_to='attachment/%Y/%m/%d/',blank=True,help_text='文章内容末尾显示的附件')
     
     column=models.ForeignKey(Column,verbose_name='所属栏目')
     
